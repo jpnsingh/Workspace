@@ -80,13 +80,4 @@ public class MyLinkedList {
         System.out.println(myLinkedList.toString());
         System.out.println(myLinkedList.get(1));
     }
-
-    static class ListNode {
-        private int val;
-        private ListNode next;
-
-        ListNode(int value) {
-            this.val = value;
-        }
-    }
 }
