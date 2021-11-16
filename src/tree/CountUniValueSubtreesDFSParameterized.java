@@ -4,7 +4,7 @@ public class CountUniValueSubtreesDFSParameterized {
     private static int count = 0;
 
     public static int countUniValueSubtrees(TreeNode root) {
-        isValidSubTree(root, 0);
+        isValidSubTree(root, root != null ? root.val: 0);
         return count;
     }
 
