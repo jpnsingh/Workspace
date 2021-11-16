@@ -1,6 +1,6 @@
 package tree;
 
-public class CountUniValueSubtrees {
+public class CountUniValueSubtreesDFS {
     private static int count = 0;
 
     public static int countUniValueSubtrees(TreeNode root) {
