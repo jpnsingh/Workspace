@@ -1,6 +1,7 @@
 package queue;
 
 import java.util.Arrays;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class MyCircularQueue {
 
@@ -8,6 +9,8 @@ public class MyCircularQueue {
     private int size;
     private int head;
     private int tail;
+
+    private final ReentrantLock queueLock = new ReentrantLock();
 
     public MyCircularQueue(int size) {
         this.data = new int[size];
@@ -17,31 +20,42 @@ public class MyCircularQueue {
     }
 
     public boolean enQueue(int val) {
-        if (isFull()) {
-            return false;
+        queueLock.lock();
+        try {
+            if (isFull()) {
+                return false;
+            }
+
+            if (isEmpty()) {
+                head = 0;
+            }
+
+            tail = (tail + 1) % size;
+            data[tail] = val;
+        } finally {
+            queueLock.unlock();
         }
 
-        if (isEmpty()) {
-            head = 0;
-        }
-
-        tail = (tail + 1) % size;
-        data[tail] = val;
         return true;
     }
 
     public boolean deQueue() {
-        if (isEmpty()) {
-            return false;
-        }
+        queueLock.lock();
+        try {
+            if (isEmpty()) {
+                return false;
+            }
 
-        if (head == tail) {
-            head = -1;
-            tail = -1;
-            return true;
-        }
+            if (head == tail) {
+                head = -1;
+                tail = -1;
+                return true;
+            }
 
-        head = (head + 1) % size;
+            head = (head + 1) % size;
+        } finally {
+            queueLock.unlock();
+        }
         return true;
     }
 
