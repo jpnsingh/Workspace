@@ -4,14 +4,31 @@ package linkedlist;
 import java.util.ArrayList;
 import java.util.List;
 
-class ListNode {
+public class ListNode {
     int val;
-    ListNode next;
 
-    ListNode() {
+    public int getVal() {
+        return val;
     }
 
-    ListNode(int x) {
+    public void setVal(int val) {
+        this.val = val;
+    }
+
+    public ListNode getNext() {
+        return next;
+    }
+
+    public void setNext(ListNode next) {
+        this.next = next;
+    }
+
+    ListNode next;
+
+    public ListNode() {
+    }
+
+    public ListNode(int x) {
         val = x;
         next = null;
     }
@@ -28,4 +45,3 @@ class ListNode {
         return listNodes.toString();
     }
 }
-
